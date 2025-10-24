@@ -1,0 +1,68 @@
+
+generator client {
+  provider = "prisma-client-js"
+   
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  name      String
+  email     String     @unique
+  password  String
+  role      String     @default("employee")
+  reports   Report[]
+  createdAt DateTime   @default(now())
+}
+
+model Report {
+  id                  Int       @id @default(autoincrement())
+  type                String    // "paleteira" | "empilhadeira"
+
+  // --- Campos comuns ---
+  client              String
+  city                String?
+  date                DateTime  @default(now())
+  pdfUrl              String?
+  user                User      @relation(fields: [userId], references: [id])
+  userId              Int
+
+  // --- Campos de Paleteira ---
+  contactName         String?   // nome
+  phone               String?
+  email               String?
+  brandModel          String?
+  defectDescription   String?
+  serviceDescription  String?
+  loanProvided        Boolean?  @default(false)
+  loanBrandModel      String?
+
+  // --- Campos de Empilhadeira ---
+  requestNumber       String?   // chamado
+  forkliftModel       String?
+  registration        String?   // matrícula
+  hourmeter           String?
+  defect              String?
+  possibleCauses      String?
+  solution            String?
+  testPerformed       Boolean?
+  testReason          String?
+  result              String?   // "positivo" | "negativo"
+  observations        String?
+  serviceType         String?   // "em garantia" | outro
+
+  // --- Assinaturas ---
+  clientSignature     String?
+  technicianSignature String?
+
+  // --- Campos dinâmicos (listas) ---
+  otherServices       Json?     // array de objetos [{ name, date, from, to, total }]
+  trips               Json?     // [{ from, to, km, hours, total }]
+  materialsUsed       Json?     // [{ quantity, description }]
+
+  createdAt           DateTime  @default(now())
+}
