@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import "../styles/register.css";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../styles/register.css";
 
 export default function Register() {
   const nav = useNavigate();
@@ -30,18 +32,18 @@ export default function Register() {
 
     try {
       if (formData.password !== repeatPassword) {
-        return alert("Passwords must match!");
+        return toast.error("Senhas não coincidem!");
       }
 
       if (formData.role === "admin" && adminKey !== adminPass) {
-        return alert("Wrong admin password");
+        return toast.error("Senha de admin incorreta!");
       }
 
       const res = await axios.post("http://localhost:5000/register", formData);
 
       console.log(res.data);
 
-      alert("Usuario registrado com sucesso!");
+      toast.success("Usuario registrado com sucesso!");
       nav("/login");
     } catch (error) {
       console.error(error);
@@ -78,12 +80,14 @@ export default function Register() {
             value={formData.password}
             onChange={handleChange}
             name="password"
+            autoComplete="off"
             placeholder="Senha"
             required
           />
           <input
             type="password"
             name="password2"
+            autoComplete="off"
             onChange={(e) => setRepeatPassword(e.target.value)}
             value={repeatPassword}
             placeholder="Repetir senha"
