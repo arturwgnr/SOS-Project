@@ -25,7 +25,7 @@ function App() {
 
       <ToastContainer
         position="top-center"
-        autoClose={2100}
+        autoClose={2550}
         hideProgressBar
         closeOnClick
         pauseOnHover
