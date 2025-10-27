@@ -1,18 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "../styles/register.css";
-import api from "../services/api";
+import axios from "axios";
 
 export default function Register() {
   const nav = useNavigate();
 
   const [adminKey, setAdminKey] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     role: "employee",
   });
+
+  const adminPass = "paumagiu";
 
   function handleChange(e) {
     setFormData({
@@ -21,11 +24,25 @@ export default function Register() {
     });
   }
 
-  function handleRegister(e) {
+  async function handleRegister(e) {
     e.preventDefault();
+    console.log("submit funcionando");
 
     try {
-      console.log("Oi?");
+      if (formData.password !== repeatPassword) {
+        return alert("Passwords must match!");
+      }
+
+      if (formData.role === "admin" && adminKey !== adminPass) {
+        return alert("Wrong admin password");
+      }
+
+      const res = await axios.post("http://localhost:5000/register", formData);
+
+      console.log(res.data);
+
+      alert("Usuario registrado com sucesso!");
+      nav("/login");
     } catch (error) {
       console.error(error);
     }
@@ -37,7 +54,7 @@ export default function Register() {
         <h1>SOS Transpaletes ⚙️</h1>
         <p>Crie sua conta para acessar o sistema de relatórios técnicos.</p>
 
-        <form>
+        <form onSubmit={handleRegister}>
           <input
             onChange={handleChange}
             value={formData.name}
@@ -64,12 +81,15 @@ export default function Register() {
             placeholder="Senha"
             required
           />
-          <select
-            value={formData.role}
-            onChange={handleChange}
-            name="role"
-            defaultValue="employee"
-          >
+          <input
+            type="password"
+            name="password2"
+            onChange={(e) => setRepeatPassword(e.target.value)}
+            value={repeatPassword}
+            placeholder="Repetir senha"
+            required
+          />
+          <select name="role" value={formData.role} onChange={handleChange}>
             <option value="employee">Funcionário</option>
             <option value="admin">Administrador</option>
           </select>
