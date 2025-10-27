@@ -5,6 +5,10 @@ import Landing from "./pages/Landing";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import PalletReport from "./pages/PalletReport";
+import History from "./pages/History";
+import ForkliftReport from "./pages/ForkLiftReport";
+import "./styles/variables.css";
 
 function App() {
   return (
@@ -21,6 +25,32 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/pallet-report"
+          element={
+            <PrivateRoute>
+              <PalletReport />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/history"
+          element={
+            <PrivateRoute>
+              <History />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/forklift-report"
+          element={
+            <PrivateRoute>
+              <ForkliftReport />
+            </PrivateRoute>
+          }
+        />
       </Routes>
 
       <ToastContainer
@@ -29,7 +59,7 @@ function App() {
         hideProgressBar
         closeOnClick
         pauseOnHover
-        theme="light"
+        theme="dark"
       />
     </BrowserRouter>
   );

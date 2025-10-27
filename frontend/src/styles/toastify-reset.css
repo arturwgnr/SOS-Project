@@ -1,0 +1,35 @@
+/* Remove completamente o tema amarelo global do Toastify */
+:root {
+  --toastify-color-warning: var(--color-primary) !important;
+  --toastify-icon-color-warning: var(--color-primary) !important;
+  --toastify-color-progress-warning: var(--color-primary) !important;
+  --toastify-color-light: var(--color-bg) !important;
+  --toastify-text-color-light: var(--color-text-primary) !important;
+}
+
+.Toastify__toast-container,
+.Toastify__toast {
+  background: var(--color-surface) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.Toastify__close-button {
+  color: var(--color-text-primary) !important;
+}
+
+.Toastify__progress-bar {
+  background: var(--color-primary) !important;
+}
+
+/* Força tema do app */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+  background: none !important;
+  color: var(--color-text-primary) !important;
+}

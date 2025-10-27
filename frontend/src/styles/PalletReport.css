@@ -1,0 +1,148 @@
+/* === CONTAINER PRINCIPAL === */
+.pallet-report {
+  background-color: var(--color-bg) !important;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+  color: var(--color-text-primary) !important;
+}
+
+.clear-btn {
+  background-color: #54a2fc !important;
+  color: white !important;
+}
+
+/* === CARD PRINCIPAL === */
+.report-container {
+  width: 100%;
+  max-width: 900px;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-glass);
+}
+
+/* === CABEÇALHO === */
+.report-container h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--color-primary) !important;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.report-container p {
+  text-align: center;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* === FORM === */
+.report-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+/* === INPUTS E TEXTAREAS === */
+input,
+textarea,
+select {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.8rem;
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+  transition: 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* === RADIO GROUP === */
+.radio-group {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 0.3rem;
+}
+
+.radio-group label {
+  flex-direction: row;
+  gap: 0.5rem;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+/* === ERROS === */
+.error {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+/* === ASSINATURAS === */
+.signatures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+}
+
+.signatures canvas {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* === BOTÃO PRINCIPAL === */
+button[type="submit"] {
+  margin-top: 1rem;
+  padding: 0.9rem 1.5rem;
+  background: var(--color-primary) !important;
+  color: #fff !important;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 8px var(--color-primary);
+}
+
+/* === RESPONSIVIDADE === */
+@media (max-width: 768px) {
+  .report-container {
+    padding: 1.5rem;
+  }
+  .form-row {
+    flex-direction: column;
+  }
+}

@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "../styles/register.css";
 
 export default function Register() {

@@ -1,0 +1,27 @@
+/* Remove qualquer tema amarelo residual do Toastify e resets genéricos */
+:root {
+  --toastify-color-warning: var(--color-primary);
+  --toastify-icon-color-warning: var(--color-primary);
+  --toastify-color-progress-warning: var(--color-primary);
+}
+
+body {
+  background-color: var(--color-bg) !important;
+  color: var(--color-text-primary) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-primary) !important;
+}
+
+button {
+  background-color: var(--color-primary) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: var(--radius);
+}

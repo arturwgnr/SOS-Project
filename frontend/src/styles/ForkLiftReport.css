@@ -1,0 +1,194 @@
+/* ===============================
+   FORKLIFT REPORT PAGE STYLES
+   =============================== */
+@import "./variables.css";
+
+.pallet-report {
+  background: rgba(20, 20, 30, 0.95);
+  min-height: 100vh;
+  color: #fff;
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+}
+
+button {
+  background-color: #54a2fc !important;
+  color: white !important;
+}
+
+h3 {
+  color: #54a2fc !important;
+}
+
+.report-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+}
+
+.report-container h1 {
+  text-align: center;
+  color: #f5b453;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.report-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ========== INPUTS ========== */
+.report-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  color: #ddd;
+}
+
+.report-form input,
+.report-form textarea,
+.report-form select {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  color: #fff;
+  outline: none;
+  transition: 0.3s;
+}
+
+.report-form input:focus,
+.report-form textarea:focus,
+.report-form select:focus {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.report-form textarea {
+  resize: none;
+}
+
+/* ========== FORM ROWS ========== */
+.form-row {
+  display: flex;
+  align-items: center; /* 🔹 centraliza verticalmente os itens */
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  flex: 1;
+}
+
+.form-row label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+/* ========== TITLES ========== */
+.report-form h3 {
+  margin-top: 1.8rem;
+  margin-bottom: 0.8rem;
+  color: #f5b453;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+}
+
+/* ========== BUTTONS ========== */
+.report-form button {
+  background: #f5b453;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  color: #000;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.report-form button:hover {
+  background: #ffc470;
+}
+
+.report-form button[type="submit"] {
+  align-self: center;
+  margin-top: 2rem;
+  font-size: 1rem;
+  padding: 0.8rem 1.6rem;
+}
+
+/* ========== SIGNATURES ========== */
+.signatures {
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.signatures > div {
+  flex: 1;
+  min-width: 260px;
+}
+
+.signature-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signature-canvas {
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.clear-btn {
+  margin-top: 0.5rem;
+  background: #f5b453;
+  color: #000;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.clear-btn:hover {
+  background: #ffc470;
+}
+
+/* ========== ERRORS ========== */
+.error {
+  color: #ff7676;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  text-align: center;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .report-container {
+    padding: 1.5rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .report-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .report-form h3 {
+    font-size: 1rem;
+  }
+}

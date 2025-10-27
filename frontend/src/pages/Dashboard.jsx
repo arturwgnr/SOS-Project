@@ -27,12 +27,12 @@ export default function Dashboard() {
         <p>Escolha o tipo de relatório que deseja criar:</p>
 
         <div className="cards-container">
-          <div className="card glass" onClick={() => nav("/pallet")}>
+          <div className="card glass" onClick={() => nav("/pallet-report")}>
             <h3>📦 Paleteira</h3>
             <p>Crie relatórios técnicos de manutenção de paleteiras.</p>
           </div>
 
-          <div className="card glass" onClick={() => nav("/forklift")}>
+          <div className="card glass" onClick={() => nav("/forklift-report")}>
             <h3>🏗️ Empilhadeira</h3>
             <p>Relatórios completos de serviços em empilhadeiras.</p>
           </div>
