@@ -12,7 +12,13 @@ dotenv.config();
 const prisma = new PrismaClient();
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://sos-project-aw.vercel.app", "http://localhost:5173"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 const localHost = `http://localhost:5000/`;
