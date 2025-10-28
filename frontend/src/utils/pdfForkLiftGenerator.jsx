@@ -24,7 +24,7 @@ function wrapText(text, font, size, maxWidth) {
 }
 
 // --- Gerador de ID exclusivo para Empilhadeira ---
-export function generateForkliftReportId() {
+export function generateForkLiftReportId() {
   const key = "forklift_id_counter";
   let counter = parseInt(localStorage.getItem(key) || "0", 10);
   counter++;
