@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../styles/ForkLiftReport.css";
 import SignaturePad from "../components/SignaturePad";
-import { generateForkLiftReportPDF } from "../utils/pdfForkliftGenerator";
+import { generateForkLiftReportPDF } from "../utils/pdfForkLiftGenerator";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { generateForkliftReportId } from "../utils/idGenerator";
