@@ -3,6 +3,7 @@ import "../styles/ForkLiftReport.css";
 import SignaturePad from "../components/SignaturePad";
 import { generateForkLiftReportPDF } from "../utils/pdfForkLiftGenerator";
 import { toast } from "react-toastify";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { generateForkliftReportId } from "../utils/idGenerator";
 
@@ -78,12 +79,9 @@ export default function ForkliftReport() {
         pdfUrl,
       };
 
-      const saved = JSON.parse(localStorage.getItem("reports") || "[]");
-      saved.push(newReport);
-      localStorage.setItem("reports", JSON.stringify(saved));
+      await axios.post(`${import.meta.env.VITE_API_URL}/reports`, newReport);
 
-      toast.success("PDF gerado e salvo no histórico!");
-
+      toast.success("Relatório salvo no banco!");
       nav("/history");
     }
   };

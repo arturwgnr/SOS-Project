@@ -38,7 +38,10 @@ export default function Register() {
         return toast.error("Senha de admin incorreta!");
       }
 
-      const res = await axios.post("http://localhost:5000/register", formData);
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/register`,
+        formData
+      );
 
       console.log(res.data);
 

@@ -4,6 +4,7 @@ import SignaturePad from "../components/SignaturePad";
 import { generatePalletReportPDF } from "../utils/pdfGenerator";
 import { generatePalletReportId } from "../utils/idGenerator";
 import { toast } from "react-toastify";
+import axios from "axios";
 import "../styles/PalletReport.css";
 
 export default function PalletReport() {
@@ -55,12 +56,9 @@ export default function PalletReport() {
         pdfUrl,
       };
 
-      const saved = JSON.parse(localStorage.getItem("reports") || "[]");
-      saved.push(newReport);
-      localStorage.setItem("reports", JSON.stringify(saved));
+      await axios.post(`${import.meta.env.VITE_API_URL}/reports`, newReport);
 
-      toast.success("PDF gerado e salvo no histórico!");
-
+      toast.success("Relatório salvo no banco!");
       nav("/history");
     }
   };

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import "../styles/History.css";
 
 export default function History() {
@@ -19,13 +20,19 @@ export default function History() {
   const reportsPerPage = 5; // número de registros por página
 
   useEffect(() => {
-    const saved = localStorage.getItem("reports");
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      const sorted = parsed.sort((a, b) => new Date(b.date) - new Date(a.date));
-      setReports(sorted);
-      setFilteredReports(sorted);
+    async function fetchReports() {
+      try {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/reports`);
+        const sorted = res.data.Reports?.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+        setReports(sorted || []);
+        setFilteredReports(sorted || []);
+      } catch (err) {
+        console.error(err);
+      }
     }
+    fetchReports();
   }, []);
 
   const saveReports = (data) => {
