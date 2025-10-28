@@ -32,7 +32,7 @@ export function generateForkLiftReportId() {
   return counter.toString().padStart(4, "0");
 }
 
-export async function generateForkliftReportPDF(data) {
+export async function generateForkLiftReportPDF(data) {
   const pdfDoc = await PDFDocument.create();
   const page = pdfDoc.addPage([595, 842]);
   const { height, width } = page.getSize();
