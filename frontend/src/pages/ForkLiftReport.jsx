@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../styles/ForkLiftReport.css";
 import SignaturePad from "../components/SignaturePad";
-import { generateForkliftReportPDF } from "../utils/pdfForkliftGenerator";
+import { generateForkLiftReportPDF } from "../utils/pdfForkliftGenerator";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { generateForkliftReportId } from "../utils/idGenerator";
@@ -68,7 +68,7 @@ export default function ForkliftReport() {
 
     if (Object.keys(newErrors).length === 0) {
       const id = generateForkliftReportId();
-      const pdfUrl = await generateForkliftReportPDF({ ...formData, id });
+      const pdfUrl = await generateForkLiftReportPDF({ ...formData, id });
 
       const newReport = {
         id,
