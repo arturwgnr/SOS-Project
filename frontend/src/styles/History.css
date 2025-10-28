@@ -341,7 +341,7 @@ select {
   }
 
   .history {
-    margin-top: 90px !important; /* espaço da topbar */
+    margin-top: 50px !important; /* espaço da topbar */
     padding: 0 2rem !important;
     max-width: 1200px;
     margin-inline: auto;
