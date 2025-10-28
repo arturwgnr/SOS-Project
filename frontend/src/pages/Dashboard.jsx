@@ -7,7 +7,7 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard">
-      <main className="dashboard-content">
+      <main className="dashboard-content-oficial">
         <h1>Bem-vindo, {user?.name?.split(" ")[0]}!</h1>
         <p>Escolha o tipo de relatório que deseja criar:</p>
 
@@ -28,11 +28,12 @@ export default function Dashboard() {
           </div>
 
           {/* 💬 Card motivacional (só desktop) */}
-          <div className="motivational-card glass">
-            <h2>
+
+          <div className="motivational-wrapper">
+            <div className="motivational-card">
               “Cada relatório é mais do que um arquivo, é um registro da tua
               excelência técnica.” 📋
-            </h2>
+            </div>
           </div>
         </div>
       </main>

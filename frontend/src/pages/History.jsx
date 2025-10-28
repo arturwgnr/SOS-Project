@@ -14,6 +14,10 @@ export default function History() {
     pdfFile: null,
   });
 
+  // 🔹 Estado da paginação
+  const [currentPage, setCurrentPage] = useState(1);
+  const reportsPerPage = 5; // número de registros por página
+
   useEffect(() => {
     const saved = localStorage.getItem("reports");
     if (saved) {
@@ -26,10 +30,12 @@ export default function History() {
 
   const saveReports = (data) => {
     localStorage.setItem("reports", JSON.stringify(data));
-    setReports(data);
-    setFilteredReports(
-      [...data].sort((a, b) => new Date(b.date) - new Date(a.date))
+    const sorted = [...data].sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
     );
+    setReports(sorted);
+    setFilteredReports(sorted);
+    setCurrentPage(1);
   };
 
   const handleManualAdd = async (e) => {
@@ -44,18 +50,17 @@ export default function History() {
       return;
     }
 
-    const file = newReport.pdfFile;
+    const now = new Date();
+    const formattedDateTime = now.toISOString();
+
     const reader = new FileReader();
-
     reader.onloadend = () => {
-      const pdfUrl = reader.result;
-
       const report = {
         id: newReport.id,
         type: newReport.type,
         client: newReport.client,
-        date: newReport.date,
-        pdfUrl,
+        date: formattedDateTime, // grava data + hora completa
+        pdfUrl: reader.result,
       };
 
       const updated = [...reports, report];
@@ -71,7 +76,7 @@ export default function History() {
       alert("✅ Documento adicionado ao histórico!");
     };
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(newReport.pdfFile);
   };
 
   const handleDownload = (url, id, type) => {
@@ -92,17 +97,24 @@ export default function History() {
     const { startDate, endDate } = updatedFilter;
     let filtered = [...reports];
 
-    if (startDate) {
+    if (startDate)
       filtered = filtered.filter(
         (r) => new Date(r.date) >= new Date(startDate)
       );
-    }
-    if (endDate) {
+    if (endDate)
       filtered = filtered.filter((r) => new Date(r.date) <= new Date(endDate));
-    }
 
     setFilteredReports(filtered);
+    setCurrentPage(1);
   };
+
+  // 🔹 Paginação
+  const totalPages = Math.ceil(filteredReports.length / reportsPerPage);
+  const startIndex = (currentPage - 1) * reportsPerPage;
+  const currentReports = filteredReports.slice(
+    startIndex,
+    startIndex + reportsPerPage
+  );
 
   return (
     <div className="history">
@@ -192,8 +204,9 @@ export default function History() {
         </div>
       </div>
 
+      {/* 🔹 MOBILE VIEW */}
       <div className="history-cards">
-        {filteredReports.map((report) => (
+        {currentReports.map((report) => (
           <div key={report.id} className="history-card">
             <h3>{report.client}</h3>
             <p>
@@ -205,7 +218,11 @@ export default function History() {
             </p>
             <p>
               <strong>Data:</strong>{" "}
-              {new Date(report.date).toLocaleDateString("pt-BR")}
+              {new Date(report.date).toLocaleDateString("pt-BR")}{" "}
+              {new Date(report.date).toLocaleTimeString("pt-BR", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
             </p>
             <div className="history-actions">
               <button
@@ -218,27 +235,55 @@ export default function History() {
             </div>
           </div>
         ))}
+
+        {totalPages > 1 && (
+          <div className="pagination">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((p) => p - 1)}
+            >
+              ◀ Anterior
+            </button>
+            <span>
+              {currentPage} / {totalPages}
+            </span>
+            <button
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((p) => p + 1)}
+            >
+              Próximo ▶
+            </button>
+          </div>
+        )}
       </div>
 
+      {/* 🔹 DESKTOP TABLE */}
       <table className="history-table">
         <thead>
           <tr>
             <th>ID</th>
             <th>Cliente</th>
             <th>Tipo</th>
-            <th>Data</th>
+            <th>Data / Hora</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          {filteredReports.map((report) => (
+          {currentReports.map((report) => (
             <tr key={report.id}>
               <td>{report.id}</td>
               <td>{report.client}</td>
               <td>
                 {report.type === "paleteira" ? "Paleteira" : "Empilhadeira"}
               </td>
-              <td>{new Date(report.date).toLocaleDateString("pt-BR")}</td>
+              <td>
+                {new Date(report.date).toLocaleDateString("pt-BR")}
+                {" - "}
+                {new Date(report.date).toLocaleTimeString("pt-BR", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </td>
               <td>
                 <button
                   className="downloadbtn"
