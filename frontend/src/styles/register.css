@@ -60,6 +60,7 @@
   box-shadow: var(--shadow-glass);
   backdrop-filter: blur(var(--blur));
   color: var(--color-text-primary);
+  transform: none !important;
   text-align: center;
   position: relative;
   z-index: 2;
@@ -157,5 +158,35 @@ select:focus {
   input,
   select {
     font-size: 0.95rem;
+  }
+}
+
+/* === AJUSTES MOBILE EXTRAS === */
+@media (max-width: 600px) {
+  .register-page {
+    padding: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .register-container {
+    width: 100%;
+    max-width: 360px;
+    margin-top: 15vh;
+    border-radius: 12px;
+  }
+
+  form {
+    gap: 0.9rem;
+  }
+
+  input,
+  select,
+  .btn-primary {
+    width: 100%;
+  }
+
+  .login-link {
+    font-size: 0.85rem;
+    margin-top: 1rem;
   }
 }

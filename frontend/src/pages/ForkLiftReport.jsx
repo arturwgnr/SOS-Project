@@ -2,9 +2,13 @@ import { useState } from "react";
 import "../styles/ForkLiftReport.css";
 import SignaturePad from "../components/SignaturePad";
 import { generateForkliftReportPDF } from "../utils/pdfForkliftGenerator";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import { generateForkliftReportId } from "../utils/idGenerator";
 
 export default function ForkliftReport() {
+  const nav = useNavigate("/history");
+
   const [formData, setFormData] = useState({
     client: "",
     city: "",
@@ -78,7 +82,9 @@ export default function ForkliftReport() {
       saved.push(newReport);
       localStorage.setItem("reports", JSON.stringify(saved));
 
-      alert("✅ PDF gerado e salvo no histórico!");
+      toast.success("PDF gerado e salvo no histórico!");
+
+      nav("/history");
     }
   };
 

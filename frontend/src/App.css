@@ -1,0 +1,12 @@
+/* === FIX TOAST CLOSE BUTTON === */
+.Toastify__close-button {
+  background: transparent !important; /* remove cor de fundo */
+  color: inherit !important; /* mantém a cor padrão do texto/ícone */
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.Toastify__close-button:hover {
+  background: transparent !important;
+  opacity: 0.7;
+}

@@ -62,6 +62,7 @@
   color: var(--color-text-primary);
   text-align: center;
   position: relative;
+  transform: none !important;
   z-index: 2;
 }
 
@@ -154,5 +155,34 @@ input:focus {
 
   input {
     font-size: 0.95rem;
+  }
+}
+
+/* === AJUSTES MOBILE EXTRAS === */
+@media (max-width: 600px) {
+  .login-page {
+    padding: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .login-container {
+    width: 100%;
+    max-width: 360px;
+    margin-top: 15vh;
+    border-radius: 12px;
+  }
+
+  form {
+    gap: 0.9rem;
+  }
+
+  input,
+  .btn-primary {
+    width: 100%;
+  }
+
+  .register-link {
+    font-size: 0.85rem;
+    margin-top: 1rem;
   }
 }

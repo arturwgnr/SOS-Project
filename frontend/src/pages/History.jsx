@@ -18,15 +18,18 @@ export default function History() {
     const saved = localStorage.getItem("reports");
     if (saved) {
       const parsed = JSON.parse(saved);
-      setReports(parsed);
-      setFilteredReports(parsed);
+      const sorted = parsed.sort((a, b) => new Date(b.date) - new Date(a.date));
+      setReports(sorted);
+      setFilteredReports(sorted);
     }
   }, []);
 
   const saveReports = (data) => {
     localStorage.setItem("reports", JSON.stringify(data));
     setReports(data);
-    setFilteredReports(data);
+    setFilteredReports(
+      [...data].sort((a, b) => new Date(b.date) - new Date(a.date))
+    );
   };
 
   const handleManualAdd = async (e) => {

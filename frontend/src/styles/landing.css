@@ -89,6 +89,13 @@ body {
   letter-spacing: 1px;
 }
 
+.logo-img {
+  cursor: pointer;
+  height: 70px;
+  width: auto;
+  object-fit: contain;
+}
+
 .nav-links {
   display: flex;
   align-items: center;
@@ -96,7 +103,7 @@ body {
 }
 
 .btn-text {
-  background: none;
+  background: none !important ;
   border: none;
   color: var(--color-text-secondary);
   font-weight: 500;
@@ -105,7 +112,7 @@ body {
 }
 
 .btn-text:hover {
-  color: var(--color-primary);
+  color: var(--color-primary) !important;
 }
 
 .btn-primary {
@@ -120,8 +127,8 @@ body {
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 5px var(--color-primary);
+  background-color: #65aafa !important;
+  box-shadow: 1px 1px 20px #54a2fc44 !important;
 }
 
 /* === HERO === */
@@ -165,12 +172,13 @@ body {
   color: var(--color-text-primary);
   font-weight: 500;
   cursor: pointer;
-  transition: var(--transition);
+  transition: 0.5s ease !important;
+  transform: scale(1.02) !important;
 }
 
 .btn-glass:hover {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+  background-color: #65a7f1 !important;
+  box-shadow: 1px 1px 30px #54a2fc44 !important;
 }
 
 .big {
@@ -225,6 +233,11 @@ body {
   color: var(--color-text-secondary);
   font-size: 0.85rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navbar {
+  height: 70px;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.199);
 }
 
 /* === RESPONSIVIDADE === */

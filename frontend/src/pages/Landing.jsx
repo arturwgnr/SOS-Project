@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/sos-logo.png";
 import "../styles/landing.css";
 
 export default function Landing() {
@@ -7,7 +8,15 @@ export default function Landing() {
   return (
     <div className="landing">
       <nav className="navbar">
-        <div className="logo">SOS</div>
+        <div
+          className="logo"
+          style={{ cursor: "pointer" }}
+          onClick={() =>
+            window.open("https://sostranspaletes.com.br/", "_blank")
+          }
+        >
+          <img src={logo} alt="SOS Transpaletes" className="logo-img" />
+        </div>
         <div className="nav-links">
           <button onClick={() => nav("/login")} className="btn-text">
             Login

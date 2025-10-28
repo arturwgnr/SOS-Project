@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SignaturePad from "../components/SignaturePad";
 import { generatePalletReportPDF } from "../utils/pdfGenerator";
 import { generatePalletReportId } from "../utils/idGenerator";
+import { toast } from "react-toastify";
 import "../styles/PalletReport.css";
 
 export default function PalletReport() {
+  const nav = useNavigate();
+
   const [formData, setFormData] = useState({
     client: "",
     city: "",
@@ -55,7 +59,9 @@ export default function PalletReport() {
       saved.push(newReport);
       localStorage.setItem("reports", JSON.stringify(saved));
 
-      alert("✅ PDF gerado e salvo no histórico!");
+      toast.success("PDF gerado e salvo no histórico!");
+
+      nav("/history");
     }
   };
 

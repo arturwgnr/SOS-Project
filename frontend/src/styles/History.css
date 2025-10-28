@@ -1,13 +1,8 @@
 /* ===============================
    HISTORY PAGE STYLES
    =============================== */
-
 .history {
-  padding: 2rem;
-  color: #fff;
-  background: rgba(20, 20, 30, 0.9);
-  min-height: 100vh;
-  backdrop-filter: blur(12px);
+  width: 100% !important;
 }
 
 .history h1 {
@@ -245,7 +240,31 @@ select {
 }
 
 @media (max-width: 767px) {
+  .history {
+    margin-top: 30px !important;
+  }
   .history-table {
     display: none;
   }
+}
+
+.history h1,
+.history h2,
+.history h3 {
+  color: #f5b453 !important;
+}
+
+.history button,
+.history .history-actions button,
+.history .downloadbtn {
+  background-color: #f5b453 !important;
+  color: #000 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.history button:hover,
+.history .history-actions button:hover,
+.history .downloadbtn:hover {
+  background-color: #ffbd59 !important;
 }

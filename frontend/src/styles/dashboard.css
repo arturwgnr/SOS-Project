@@ -14,13 +14,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 85px;
+  width: 100%;
   padding: 1rem 3rem;
   background: rgba(255, 255, 255, 0.03);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  border-radius: 0px !important;
 }
 
 .topbar:hover {
-  transform: none;
+  transform: none !important;
+}
+
+.logo-img {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
 }
 
 .user-info {
@@ -40,8 +54,8 @@
 }
 
 .btn-logout:hover {
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+  background-color: #66acfd !important;
+  box-shadow: 1px 1px 20px #54a2fc56 !important;
 }
 
 /* CONTENT */
@@ -97,16 +111,66 @@
   font-size: 0.95rem;
 }
 
-/* RESPONSIVE */
+/* === CARD MOTIVACIONAL (DESKTOP ONLY) === */
+.motivational-card {
+  margin-top: 3rem;
+  max-width: 820px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  color: #66acfd;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  margin-top: 40px;
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .motivational-card {
+    display: none;
+  }
+}
+
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
   .topbar {
-    flex-direction: column;
-    gap: 0.8rem;
-    text-align: center;
+    flex-direction: row; /* mantém lado a lado */
+    justify-content: space-between;
+    padding: 1rem 1.2rem;
+    position: fixed;
+    width: 100% !important;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+  }
+
+  .dashboard-content {
+    margin-top: 50px; /* espaço para o topbar fixo */
+    padding: 2rem 1.5rem;
   }
 
   .cards-container {
     flex-direction: column;
     align-items: center;
+  }
+
+  .logo-img {
+    height: 34px;
   }
 }

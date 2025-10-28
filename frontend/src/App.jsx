@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import PrivateRoute from "./components/PrivateRoute";
+import Topbar from "./components/Topbar";
 import Landing from "./pages/Landing";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -8,49 +9,30 @@ import Dashboard from "./pages/Dashboard";
 import PalletReport from "./pages/PalletReport";
 import History from "./pages/History";
 import ForkliftReport from "./pages/ForkLiftReport";
-import "./styles/variables.css";
+import "./App.css";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Rotas públicas */}
         <Route path="/" element={<Landing />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/pallet-report"
-          element={
-            <PrivateRoute>
-              <PalletReport />
-            </PrivateRoute>
-          }
-        />
 
+        {/* Rotas privadas com Topbar global */}
         <Route
-          path="/history"
           element={
             <PrivateRoute>
-              <History />
+              <Topbar />
             </PrivateRoute>
           }
-        />
-
-        <Route
-          path="/forklift-report"
-          element={
-            <PrivateRoute>
-              <ForkliftReport />
-            </PrivateRoute>
-          }
-        />
+        >
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/pallet-report" element={<PalletReport />} />
+          <Route path="/forklift-report" element={<ForkliftReport />} />
+          <Route path="/history" element={<History />} />
+        </Route>
       </Routes>
 
       <ToastContainer
@@ -59,7 +41,7 @@ function App() {
         hideProgressBar
         closeOnClick
         pauseOnHover
-        theme="dark"
+        theme="light"
       />
     </BrowserRouter>
   );
