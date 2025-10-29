@@ -143,6 +143,9 @@ app.post("/reports", async (req, res) => {
       reportData.user = { connect: { id: data.userId } };
     }
 
+    // 🔹 Garante que o id seja ignorado (deixa o Prisma gerar automaticamente)
+    delete reportData.id;
+
     const report = await prisma.report.create({ data: reportData });
 
     res.status(201).json(report);
