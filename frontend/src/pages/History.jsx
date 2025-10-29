@@ -16,9 +16,8 @@ export default function History() {
     pdfFile: null,
   });
 
-  // 🔹 Estado da paginação
   const [currentPage, setCurrentPage] = useState(1);
-  const reportsPerPage = 5; // número de registros por página
+  const reportsPerPage = 5;
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -28,22 +27,21 @@ export default function History() {
       try {
         let res;
         if (user.role === "admin") {
-          // 🔹 Admin vê todos os relatórios
           res = await axios.get(`${import.meta.env.VITE_API_URL}/reports`);
         } else {
-          // 🔹 Funcionário vê só os dele
           res = await axios.get(
             `${import.meta.env.VITE_API_URL}/reports/user/${user.id}`
           );
         }
 
-        const sorted = res.data.Reports?.sort(
-          (a, b) => new Date(b.date) - new Date(a.date)
-        );
-        setReports(sorted || []);
-        setFilteredReports(sorted || []);
+        // 🔹 Compatível com as duas respostas possíveis
+        const data = res.data.Reports || res.data;
+        const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setReports(sorted);
+        setFilteredReports(sorted);
       } catch (err) {
         console.error(err);
+        toast.error("Erro ao carregar relatórios");
       }
     }
 
@@ -81,7 +79,7 @@ export default function History() {
         id: newReport.id,
         type: newReport.type,
         client: newReport.client,
-        date: formattedDateTime, // grava data + hora completa
+        date: formattedDateTime,
         pdfUrl: reader.result,
       };
 
@@ -130,7 +128,6 @@ export default function History() {
     setCurrentPage(1);
   };
 
-  // 🔹 Paginação
   const totalPages = Math.ceil(filteredReports.length / reportsPerPage);
   const startIndex = (currentPage - 1) * reportsPerPage;
   const currentReports = filteredReports.slice(
@@ -201,7 +198,6 @@ export default function History() {
         </button>
       </form>
 
-      {/* 🔍 FILTRO POR DATA */}
       <div className="filter-container">
         <h2>Filtrar por Data</h2>
         <div className="form-row">
@@ -226,7 +222,6 @@ export default function History() {
         </div>
       </div>
 
-      {/* 🔹 MOBILE VIEW */}
       <div className="history-cards">
         {currentReports.map((report) => (
           <div key={report.id} className="history-card">
@@ -279,7 +274,6 @@ export default function History() {
         )}
       </div>
 
-      {/* 🔹 DESKTOP TABLE */}
       <table className="history-table">
         <thead>
           <tr>

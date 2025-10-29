@@ -54,9 +54,20 @@ export default function PalletReport() {
         id,
         type: "paleteira",
         client: formData.client,
+        city: formData.city,
         date: new Date().toISOString(),
         pdfUrl,
         userId,
+        contactName: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        brandModel: formData.model,
+        defectDescription: formData.defect,
+        serviceDescription: formData.description,
+        loanProvided: formData.loan === "yes",
+        loanBrandModel: formData.loanModel,
+        clientSignature: formData.clientSignature,
+        technicianSignature: formData.sosSignature,
       };
 
       await axios.post(`${import.meta.env.VITE_API_URL}/reports`, newReport);

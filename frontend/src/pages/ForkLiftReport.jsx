@@ -77,9 +77,31 @@ export default function ForkliftReport() {
         id,
         type: "empilhadeira",
         client: formData.client,
+        city: formData.city,
         date: new Date().toISOString(),
         pdfUrl,
         userId,
+
+        // Campos de empilhadeira conforme schema
+        requestNumber: formData.call,
+        forkliftModel: formData.model,
+        registration: formData.serial,
+        hourmeter: formData.hourMeter,
+        defect: formData.defect,
+        possibleCauses: formData.cause,
+        solution: formData.solution,
+        testPerformed: formData.testDone === "yes",
+        testReason: formData.reason,
+        result: formData.result,
+        observations: formData.observation,
+        serviceType: formData.serviceType,
+        clientSignature: formData.clientSignature,
+        technicianSignature: formData.sosSignature,
+
+        // Arrays
+        otherServices: formData.services,
+        trips: formData.trips,
+        materialsUsed: formData.materials,
       };
 
       await axios.post(`${import.meta.env.VITE_API_URL}/reports`, newReport);
