@@ -133,17 +133,22 @@ app.post("/login", async (req, res) => {
 app.post("/reports", async (req, res) => {
   try {
     const data = req.body;
-    const report = await prisma.report.create({
-      data: {
-        ...data,
-        userId: data.userId,
-        date: new Date(data.date || Date.now()),
-      },
-    });
+
+    const reportData = {
+      ...data,
+      date: new Date(data.date || Date.now()),
+    };
+
+    if (data.userId) {
+      reportData.user = { connect: { id: data.userId } };
+    }
+
+    const report = await prisma.report.create({ data: reportData });
+
     res.status(201).json(report);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Erro ao criar relatório" });
+    console.error("❌ Erro ao criar relatório:", error);
+    res.status(500).json({ error: error.message });
   }
 });
 
