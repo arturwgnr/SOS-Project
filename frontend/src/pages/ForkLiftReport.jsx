@@ -56,6 +56,8 @@ export default function ForkliftReport() {
     }));
   };
 
+  const userId = JSON.parse(localStorage.getItem("user"))?.id;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = {};
@@ -77,6 +79,7 @@ export default function ForkliftReport() {
         client: formData.client,
         date: new Date().toISOString(),
         pdfUrl,
+        userId,
       };
 
       await axios.post(`${import.meta.env.VITE_API_URL}/reports`, newReport);

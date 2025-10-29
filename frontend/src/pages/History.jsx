@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import "../styles/History.css";
 
 export default function History() {
@@ -20,9 +21,22 @@ export default function History() {
   const reportsPerPage = 5; // número de registros por página
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) return;
+
     async function fetchReports() {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/reports`);
+        let res;
+        if (user.role === "admin") {
+          // 🔹 Admin vê todos os relatórios
+          res = await axios.get(`${import.meta.env.VITE_API_URL}/reports`);
+        } else {
+          // 🔹 Funcionário vê só os dele
+          res = await axios.get(
+            `${import.meta.env.VITE_API_URL}/reports/user/${user.id}`
+          );
+        }
+
         const sorted = res.data.Reports?.sort(
           (a, b) => new Date(b.date) - new Date(a.date)
         );
@@ -32,6 +46,7 @@ export default function History() {
         console.error(err);
       }
     }
+
     fetchReports();
   }, []);
 
@@ -53,7 +68,7 @@ export default function History() {
       !newReport.date ||
       !newReport.pdfFile
     ) {
-      alert("⚠ Preencha todos os campos e envie um PDF.");
+      toast.warning("Preencha todos os campos e envie um PDF.");
       return;
     }
 
@@ -80,7 +95,7 @@ export default function History() {
         date: "",
         pdfFile: null,
       });
-      alert("✅ Documento adicionado ao histórico!");
+      toast.success("Documento adicionado ao histórico!");
     };
 
     reader.readAsDataURL(newReport.pdfFile);
