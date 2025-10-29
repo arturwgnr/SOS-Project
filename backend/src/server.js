@@ -132,21 +132,19 @@ app.post("/login", async (req, res) => {
 //POST - Form
 app.post("/reports", async (req, res) => {
   try {
-    const data = req.body;
+    const {
+      id, // ignorado
+      userId,
+      ...rest
+    } = req.body;
 
-    const reportData = {
-      ...data,
-      date: new Date(data.date || Date.now()),
-    };
-
-    if (data.userId) {
-      reportData.user = { connect: { id: data.userId } };
-    }
-
-    // 🔹 Garante que o id seja ignorado (deixa o Prisma gerar automaticamente)
-    delete reportData.id;
-
-    const report = await prisma.report.create({ data: reportData });
+    const report = await prisma.report.create({
+      data: {
+        ...rest,
+        date: new Date(rest.date || Date.now()),
+        user: { connect: { id: Number(userId) } }, // ✅ o único campo relacional aceito
+      },
+    });
 
     res.status(201).json(report);
   } catch (error) {
