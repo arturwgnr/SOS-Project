@@ -7,6 +7,10 @@ import "../styles/login.css";
 export default function Login() {
   const nav = useNavigate();
 
+  const [companyKey, setCompanyKey] = useState("");
+
+  const key = "sos2026";
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -21,6 +25,10 @@ export default function Login() {
 
   async function handleLogin(e) {
     e.preventDefault();
+
+    if (companyKey !== key) {
+      return toast.error("Chave de acesso incorreta!");
+    }
 
     try {
       const res = await axios.post(
@@ -63,6 +71,12 @@ export default function Login() {
             autoComplete="off"
             placeholder="Senha"
             required
+          />
+
+          <input
+            type="password"
+            placeholder="Chave de acesso"
+            onChange={(e) => setCompanyKey(e.target.value)}
           />
 
           <button type="submit" className="btn-primary big">
